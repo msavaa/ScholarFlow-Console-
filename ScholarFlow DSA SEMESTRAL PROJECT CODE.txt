@@ -1,0 +1,89 @@
+scholarships = {
+    "Health Profession Education": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"}
+    ],
+    "Teacher Education": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"}
+    ],
+    "Information Technology": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"},
+        {"title": "Gold Eagle College Scholarship", "provider": "Insular Foundation", "link": "https://careersfilipino.com/gold-eagle-college-scholarships/"}
+    ],
+    "Science and Mathematics": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"},
+    ],
+    "Engineering": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"},
+        {"title": "Gold Eagle College Scholarship", "provider": "Insular Foundation", "link": "https://careersfilipino.com/gold-eagle-college-scholarships/"},
+        {"title": "Megaworld Scholarship", "provider": "CHED Megaworld", "link": "https://chedscholarship.com/megaworld-scholarship/#megaworld-scholarship-2025"},
+        {"title": "Panasonic College Scholarship", "provider": "CHED Panasonic", "link": "https://chedscholarship.com/panasonic-college-scholarships/"}
+    ],
+    "Architecture and Related Programs": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"},
+        {"title": "Megaworld Scholarship", "provider": "CHED Megaworld", "link": "https://chedscholarship.com/megaworld-scholarship/#megaworld-scholarship-2025"}
+    ],
+    "Business Management": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "Megaworld Scholarship", "provider": "CHED Megaworld", "link": "https://chedscholarship.com/megaworld-scholarship/#megaworld-scholarship-2025"},
+        {"title": "Panasonic College Scholarship", "provider": "CHED Panasonic", "link": "https://chedscholarship.com/panasonic-college-scholarships/"}
+    ],
+    "Public Service": [
+        {"title": "CHED Merit Scholarship", "provider": "CHED", "link": "https://chedscholarship.com/"},
+        {"title": "DOST JLSS Scholarship", "provider": "DOST", "link": "https://phscholarships.com/dost-jlss-scholarship-2025/"}
+    ]
+}
+
+def get_choice(prompt, max_num):
+    while True:
+        choice = input(prompt)
+        if choice.isdigit() and 1 <= int(choice) <= max_num:
+            return int(choice)
+        print(f"Invalid input! Please enter 1-{max_num}.")
+
+def show_scholarships(category):
+    print(f"\n--- Scholarships for {category} ---")
+    for s in scholarships[category]:
+        print(f"\nScholarship Name: {s['title']}")
+        print(f"Provider: {s['provider']}")
+        print(f"Link: {s['link']}")
+
+def show_categories():
+    print("\nCareer Field:")
+    for i, category in enumerate(scholarships, 1):
+        print(f"{i}. {category}")
+
+def main():
+    print("Welcome to ScholarFlow!")
+    
+    while True:
+        print("\n=== Scholarship Finder ===")
+        print("1. View All Scholarship by Career Field")
+        print("2. Exit Program")
+        choice = get_choice("Enter your choice (1-2): ", 2)
+        
+        if choice == 1:
+            while True:  # This loop keeps us in the career fields menu
+                show_categories()
+                cat_choice = get_choice(f"Enter Career Field Number (1-{len(scholarships)}): ", len(scholarships))
+                show_scholarships(list(scholarships.keys())[cat_choice-1])
+                
+                while True:  # This loop handles the continue prompt
+                    cont = input("\nDo you wish to continue? (yes/no): ").lower()
+                    if cont == 'no':
+                        print("Thank you for using ScholarFlow!")
+                        return
+                    elif cont == 'yes':
+                        break  # Breaks only the continue prompt loop, returns to career fields
+                    print("Invalid input! Please enter 'yes' or 'no'.")
+        else:
+            print("Thank you for using ScholarFlow!")
+            break
+
+if __name__ == "__main__":
+    main()
